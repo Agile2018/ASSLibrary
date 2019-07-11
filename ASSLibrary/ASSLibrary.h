@@ -3,10 +3,11 @@
 #include <windows.h>
 #include <vcclr.h>
 #using <System.dll>
-#include <AipuLib.h>
+#using <System.Drawing.dll>
 #include <string>
 
 using namespace System;
+using namespace System::Drawing;
 using namespace std;
 
 namespace ASSLibrary {
@@ -14,44 +15,22 @@ namespace ASSLibrary {
 	class UnmanagedAipu {
 	public:
 
-		LPCWSTR GetError() {
-			string messageReceived = aipuLib->GetMessageError();
-			wstring wideMessage(messageReceived.begin(), messageReceived.end());
-			const wchar_t* resultMessage = wideMessage.c_str();
-			return resultMessage;
-		}
+		LPCWSTR GetError();
 
-		LPCWSTR GetUser() {
-			string user = aipuLib->GetUserJSON();
-			wstring wideUser(user.begin(), user.end());
-			const wchar_t* resultUser = wideUser.c_str();
-			return resultUser;
+		LPCWSTR GetUser();
 
-		}
+		void InitLibrary();
 
-		const unsigned char GetFrame() {
-			unsigned char* frame = aipuLib->GetFrame();
-			const unsigned char* imgData = reinterpret_cast<const unsigned char*>(frame);
-			
-			return *imgData;
-		}
-
-		void InitLibrary() {
-			aipuLib->InitLibrary();
-		}
-
-		void LoadConfiguration(LPCWSTR nameFile) {
-			wstring lpcwstrToWstring(nameFile);			
-			string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
-			aipuLib->LoadConfiguration(wStringToString);
-		}
+		void LoadConfiguration(LPCWSTR nameFile);
 		
-		void RunVideo() {
-			aipuLib->RunVideo();
-		}
-
+		void RunVideo();
+		void SetIsRegister(bool option);
+		void StopVideo();
+		void SetLapseReadImage(int lapse);
+		void SetIndexImage(int index);
+		
 	private:
-		AipuLib* aipuLib = new AipuLib();
+		
 	};
 
 
@@ -61,28 +40,25 @@ namespace ASSLibrary {
 		Aipu();
 		~Aipu();
 
-		property String ^  GetError{
-			String ^ get() {
-				return gcnew String(implementAipu->GetError());
+		property System::String ^  GetError{
+			System::String ^ get() {
+				return gcnew System::String(implementAipu->GetError());
 			}
 		}
 
-		property String ^  GetUser {
-			String ^ get() {
-				return gcnew String(implementAipu->GetUser());
+		property System::String ^  GetUser {
+			System::String ^ get() {
+				return gcnew System::String(implementAipu->GetUser());
 			}
 		}
-		
-		property Byte^  GetFrame {
-			Byte^ get() {
-				return gcnew Byte(implementAipu->GetFrame());
-			}
-		}
-
+			
 		void InitLibrary();
 		void RunVideo();
-		void LoadConfiguration(String ^ fileString);
-
+		void LoadConfiguration(System::String ^ fileString);
+		void SetIsRegister(System::Boolean option);
+		void StopVideo();
+		void SetLapseReadFrame(System::Int32 lapse);
+		void SetIndexImage(System::Int32 index);
 	protected:
 
 		!Aipu() {
@@ -91,5 +67,6 @@ namespace ASSLibrary {
 
 	private:
 		UnmanagedAipu* implementAipu;
+		
 	};
 }
