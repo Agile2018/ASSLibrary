@@ -5,6 +5,7 @@
 #using <System.dll>
 #using <System.Drawing.dll>
 #include <string>
+#include <array>
 
 using namespace System;
 using namespace System::Drawing;
@@ -23,12 +24,11 @@ namespace ASSLibrary {
 
 		void LoadConfiguration(LPCWSTR nameFile);
 		
-		void RunVideo();
 		void SetIsRegister(bool option);
-		void StopVideo();
-		void SetLapseReadImage(int lapse);
-		void SetIndexImage(int index);
 		
+		void SetWorkMode(int mode);
+		int GetWorkMode();
+		void RecognitionFace(unsigned char* image, int rows, int cols);
 	private:
 		
 	};
@@ -51,14 +51,21 @@ namespace ASSLibrary {
 				return gcnew System::String(implementAipu->GetUser());
 			}
 		}
+
+		property System::Int32 GetWorkMode {
+			System::Int32 get() {
+				return implementAipu->GetWorkMode();
+			}
+		}
 			
 		void InitLibrary();
-		void RunVideo();
+		
 		void LoadConfiguration(System::String ^ fileString);
 		void SetIsRegister(System::Boolean option);
-		void StopVideo();
-		void SetLapseReadFrame(System::Int32 lapse);
-		void SetIndexImage(System::Int32 index);
+		
+		void SetWorkMode(System::Int32 mode);
+		void SetFrame(cli::array<System::Byte>^ data, 
+			System::Int32 rows, System::Int32 cols);
 	protected:
 
 		!Aipu() {

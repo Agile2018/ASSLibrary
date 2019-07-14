@@ -28,10 +28,6 @@ void Aipu::InitLibrary() {
 	implementAipu->InitLibrary();
 }
 
-void Aipu::RunVideo() {
-	implementAipu->RunVideo();
-}
-
 void Aipu::SetIsRegister(System::Boolean option) {
 	if (option.Equals(true))
 	{
@@ -43,18 +39,19 @@ void Aipu::SetIsRegister(System::Boolean option) {
 	
 }
 
-void Aipu::StopVideo() {
-	implementAipu->StopVideo();
+void Aipu::SetWorkMode(System::Int32 mode) {
+
+	implementAipu->SetWorkMode(mode);
 }
 
-void Aipu::SetLapseReadFrame(System::Int32 lapse) {
+void Aipu::SetFrame(cli::array<System::Byte>^ data, 
+	System::Int32 rows, System::Int32 cols) {
+	pin_ptr<System::Byte> ptrByte = &data[0];
+	unsigned char* bufferImage = ptrByte;
+	implementAipu->RecognitionFace(bufferImage, rows, cols);
+	//printf("ASSLIB: %d \n", data->Length);
+	//char* pch = reinterpret_cast<char*>(pby);
 	
-	implementAipu->SetLapseReadImage(lapse);
-}
-
-void Aipu::SetIndexImage(System::Int32 index) {
-
-	implementAipu->SetIndexImage(index);
 }
 
 LPCWSTR UnmanagedAipu::GetError() {
@@ -83,30 +80,20 @@ void  UnmanagedAipu::LoadConfiguration(LPCWSTR nameFile) {
 	aipuLib->LoadConfiguration(wStringToString);
 }
 
-void UnmanagedAipu::RunVideo() {
-	aipuLib->RunVideo();
-}
-
 void UnmanagedAipu::SetIsRegister(bool option) {
 	aipuLib->SetIsRegister(option);
 }
 
-void UnmanagedAipu::StopVideo() {
-	aipuLib->StopVideo();
+void UnmanagedAipu::SetWorkMode(int mode) {
+	aipuLib->SetWorkMode(mode);
 }
 
-void UnmanagedAipu::SetLapseReadImage(int lapse) {
-	aipuLib->SetLapseFrameToFrame(lapse);
+int UnmanagedAipu::GetWorkMode() {
+	return aipuLib->GetWorkMode();
 }
 
-void UnmanagedAipu::SetIndexImage(int index) {
-	aipuLib->SetIndexImage(index);
+void UnmanagedAipu::RecognitionFace(unsigned char* image,
+	int rows, int cols) {
+	aipuLib->RecognitionFace(image, rows, cols);
 }
-
-//unsigned char UnmanagedAipu::GetFrame() {
-//	unsigned char* frame = aipuLib->GetFrame();
-//	//const unsigned char* imgData = reinterpret_cast<const unsigned char*>(frame);
-//	//pin_ptr<byte> fileConfig = frame;
-//	return *frame;
-//}
 
