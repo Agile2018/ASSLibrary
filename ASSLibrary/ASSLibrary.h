@@ -15,7 +15,8 @@ namespace ASSLibrary {
 
 	class UnmanagedAipu {
 	public:
-
+		UnmanagedAipu();
+		~UnmanagedAipu();
 		LPCWSTR GetError();
 
 		LPCWSTR GetUser();
@@ -29,6 +30,7 @@ namespace ASSLibrary {
 		void SetWorkMode(int mode);
 		int GetWorkMode();
 		void RecognitionFace(unsigned char* image, int rows, int cols);
+		void Terminate();
 	private:
 		
 	};
@@ -66,6 +68,7 @@ namespace ASSLibrary {
 		void SetWorkMode(System::Int32 mode);
 		void SetFrame(cli::array<System::Byte>^ data, 
 			System::Int32 rows, System::Int32 cols);
+		void Terminate();
 	protected:
 
 		!Aipu() {

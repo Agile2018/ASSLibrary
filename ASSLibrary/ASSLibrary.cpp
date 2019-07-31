@@ -7,7 +7,7 @@
 using namespace ASSLibrary;
 
 
-AipuLib* aipuLib = new AipuLib();
+AipuLib* aipuLib;
 
 
 Aipu::Aipu() {
@@ -49,8 +49,18 @@ void Aipu::SetFrame(cli::array<System::Byte>^ data,
 	pin_ptr<System::Byte> ptrByte = &data[0];
 	unsigned char* bufferImage = ptrByte;
 	implementAipu->RecognitionFace(bufferImage, rows, cols);
-	//printf("ASSLIB: %d \n", data->Length);
-	//char* pch = reinterpret_cast<char*>(pby);
+		
+}
+
+void Aipu::Terminate() {
+	implementAipu->Terminate();
+	delete implementAipu;
+	
+}
+UnmanagedAipu::UnmanagedAipu() {
+	aipuLib = new AipuLib();
+}
+UnmanagedAipu::~UnmanagedAipu() {
 	
 }
 
@@ -74,10 +84,11 @@ void UnmanagedAipu::InitLibrary() {
 	aipuLib->InitLibrary();
 }
 
-void  UnmanagedAipu::LoadConfiguration(LPCWSTR nameFile) {
+void UnmanagedAipu::LoadConfiguration(LPCWSTR nameFile) {
 	wstring lpcwstrToWstring(nameFile);
-	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());
+	string wStringToString(lpcwstrToWstring.begin(), lpcwstrToWstring.end());	
 	aipuLib->LoadConfiguration(wStringToString);
+
 }
 
 void UnmanagedAipu::SetIsRegister(bool option) {
@@ -97,3 +108,7 @@ void UnmanagedAipu::RecognitionFace(unsigned char* image,
 	aipuLib->RecognitionFace(image, rows, cols);
 }
 
+void UnmanagedAipu::Terminate() {
+	aipuLib->Terminate();
+	delete aipuLib;
+}
