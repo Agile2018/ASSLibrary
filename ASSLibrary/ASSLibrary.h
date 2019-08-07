@@ -29,7 +29,8 @@ namespace ASSLibrary {
 		
 		void SetWorkMode(int mode);
 		int GetWorkMode();
-		void RecognitionFace(unsigned char* image, int rows, int cols);
+		void RecognitionFace(unsigned char* image, int rows, 
+			int cols, int client);
 		void Terminate();
 	private:
 		
@@ -67,7 +68,7 @@ namespace ASSLibrary {
 		
 		void SetWorkMode(System::Int32 mode);
 		void SetFrame(cli::array<System::Byte>^ data, 
-			System::Int32 rows, System::Int32 cols);
+			System::Int32 rows, System::Int32 cols, System::Int32 client);
 		void Terminate();
 	protected:
 

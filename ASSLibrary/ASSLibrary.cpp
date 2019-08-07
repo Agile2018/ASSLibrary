@@ -45,10 +45,10 @@ void Aipu::SetWorkMode(System::Int32 mode) {
 }
 
 void Aipu::SetFrame(cli::array<System::Byte>^ data, 
-	System::Int32 rows, System::Int32 cols) {
+	System::Int32 rows, System::Int32 cols, System::Int32 client) {
 	pin_ptr<System::Byte> ptrByte = &data[0];
 	unsigned char* bufferImage = ptrByte;
-	implementAipu->RecognitionFace(bufferImage, rows, cols);
+	implementAipu->RecognitionFace(bufferImage, rows, cols, client);
 		
 }
 
@@ -104,8 +104,8 @@ int UnmanagedAipu::GetWorkMode() {
 }
 
 void UnmanagedAipu::RecognitionFace(unsigned char* image,
-	int rows, int cols) {
-	aipuLib->RecognitionFace(image, rows, cols);
+	int rows, int cols, int client) {
+	aipuLib->RecognitionFace(image, rows, cols, client);
 }
 
 void UnmanagedAipu::Terminate() {
