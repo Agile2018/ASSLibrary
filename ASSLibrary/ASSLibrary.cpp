@@ -52,11 +52,20 @@ void Aipu::SetFrame(cli::array<System::Byte>^ data,
 		
 }
 
-void Aipu::Terminate() {
-	implementAipu->Terminate();
-	delete implementAipu;
+void Aipu::Terminate(System::Int32 option) {
+	implementAipu->Terminate(option);
+	if (option == 0)
+	{
+		delete implementAipu;
+	}
+	
 	
 }
+
+void Aipu::Reset() {
+	implementAipu->Reset();
+}
+
 UnmanagedAipu::UnmanagedAipu() {
 	aipuLib = new AipuLib();
 }
@@ -108,7 +117,15 @@ void UnmanagedAipu::RecognitionFace(unsigned char* image,
 	aipuLib->RecognitionFace(image, rows, cols, client);
 }
 
-void UnmanagedAipu::Terminate() {
-	aipuLib->Terminate();
-	delete aipuLib;
+void UnmanagedAipu::Terminate(int option) {
+	aipuLib->Terminate(option);
+	if (option == 0)
+	{
+		delete aipuLib;
+	}
+	
+}
+
+void UnmanagedAipu::Reset() {
+	aipuLib->Reset();
 }
