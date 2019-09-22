@@ -126,6 +126,10 @@ void Aipu::ResetIdUser() {
 	implementAipu->ResetIdUser();
 }
 
+void Aipu::SetConfigurationDatabase() {
+	implementAipu->SetConfigurationDatabase();
+}
+
 UnmanagedAipu::UnmanagedAipu() {
 	aipuLib = new AipuLib();
 }
@@ -227,4 +231,8 @@ bool UnmanagedAipu::GetStateProccessRecognition() {
 
 void UnmanagedAipu::ResetIdUser() {
 	aipuLib->ResetIdUser();
+}
+
+void UnmanagedAipu::SetConfigurationDatabase() {
+	aipuLib->SetConfigurationDatabase();
 }

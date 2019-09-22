@@ -45,6 +45,7 @@ namespace ASSLibrary {
 		void TerminateTracking();
 		bool GetStateProccessRecognition();
 		void ResetIdUser();
+		void SetConfigurationDatabase();
 	private:
 		
 	};
@@ -102,6 +103,7 @@ namespace ASSLibrary {
 		void ResfreshBetweenFrame(System::Int32 value);
 		void TerminateTracking();
 		void ResetIdUser();
+		void SetConfigurationDatabase();
 	protected:
 
 		!Aipu() {
