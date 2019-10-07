@@ -100,7 +100,7 @@ void Aipu::Reset() {
 
 cli::array<float>^ Aipu::GetCoordinates() {
 	float* coordinates = implementAipu->GetCoordinates();
-	cli::array<float>^ values = gcnew cli::array<float>(4);
+	cli::array<float>^ values = gcnew cli::array<float>(20);
 
 	for (int i = 0; i != values->Length; ++i)
 	{
