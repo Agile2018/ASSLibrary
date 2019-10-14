@@ -130,6 +130,18 @@ void Aipu::SetConfigurationDatabase() {
 	implementAipu->SetConfigurationDatabase();
 }
 
+void Aipu::ResetLowScore() {
+	implementAipu->ResetLowScore();
+}
+
+void Aipu::ResetCountRepeatUser() {
+	implementAipu->ResetCountRepeatUser();
+}
+
+void Aipu::ResetCountNotDetect() {
+	implementAipu->ResetCountNotDetect();
+}
+
 UnmanagedAipu::UnmanagedAipu() {
 	aipuLib = new AipuLib();
 }
@@ -235,4 +247,28 @@ void UnmanagedAipu::ResetIdUser() {
 
 void UnmanagedAipu::SetConfigurationDatabase() {
 	aipuLib->SetConfigurationDatabase();
+}
+
+void UnmanagedAipu::ResetLowScore() {
+	aipuLib->ResetLowScore();
+}
+
+void UnmanagedAipu::ResetCountRepeatUser() {
+	aipuLib->ResetCountRepeatUser();
+}
+
+int UnmanagedAipu::GetCountLowScore() {
+	return aipuLib->GetCountLowScore();
+}
+
+int UnmanagedAipu::GetCountRepeatUser() {
+	return aipuLib->GetCountRepeatUser();
+}
+
+void UnmanagedAipu::ResetCountNotDetect() {
+	aipuLib->ResetCountNotDetect();
+}
+
+int UnmanagedAipu::GetCountNotDetect() {
+	return aipuLib->GetCountNotDetect();
 }

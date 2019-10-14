@@ -46,6 +46,12 @@ namespace ASSLibrary {
 		bool GetStateProccessRecognition();
 		void ResetIdUser();
 		void SetConfigurationDatabase();
+		void ResetLowScore();
+		int GetCountLowScore();
+		void ResetCountRepeatUser();
+		int GetCountRepeatUser();
+		void ResetCountNotDetect();
+		int GetCountNotDetect();
 	private:
 		
 	};
@@ -81,6 +87,24 @@ namespace ASSLibrary {
 			}
 		}
 
+		property System::Int32 GetCountLowScore {
+			System::Int32 get() {
+				return implementAipu->GetCountLowScore();
+			}
+		}
+
+		property System::Int32 GetCountRepeatUser {
+			System::Int32 get() {
+				return implementAipu->GetCountRepeatUser();
+			}
+		}
+
+		property System::Int32 GetCountNotDetect {
+			System::Int32 get() {
+				return implementAipu->GetCountNotDetect();
+			}
+		}
+
 		cli::array<float>^ GetCoordinates();
 
 		void InitLibrary();
@@ -104,6 +128,9 @@ namespace ASSLibrary {
 		void TerminateTracking();
 		void ResetIdUser();
 		void SetConfigurationDatabase();
+		void ResetLowScore();		
+		void ResetCountRepeatUser();
+		void ResetCountNotDetect();		
 	protected:
 
 		!Aipu() {
